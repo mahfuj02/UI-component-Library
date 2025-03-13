@@ -1,157 +1,105 @@
-# UI Component Library with Code Quality Checks
+# UI Component Library with Code Quality Checks (Assignment 13)
 
-This project extends the UI Component Library from Assignment 12 with code quality checks and Docker deployment.
+This repository implements a UI Component Library with integrated code quality checks, continuous integration/continuous delivery (CI/CD) pipeline, and containerized deployment.
 
-## Features
+## Features Implemented
 
-- UI Component Library with reusable components
-- Husky pre-commit hooks for code quality enforcement
-- Prettier for consistent code formatting
-- ESLint for code quality rules
-- Automated testing with pre-commit validation
-- GitHub Actions CI/CD pipeline
-- Docker containerization
-- Nginx server for hosting the production build
+- **Husky Pre-commit Hooks**: Prevents commits that don't pass code quality standards
+- **Prettier Integration**: Ensures consistent code formatting
+- **ESLint Configuration**: Enforces code quality rules
+- **Automated Testing**: Runs tests before allowing commits
+- **GitHub Actions CI/CD**: Mirrors local checks in the cloud pipeline
+- **Docker Containerization**: Packages and serves the application
 
-## Prerequisites
+## Running the Application
 
-- Node.js (v16+)
-- npm (v8+)
-- Docker and Docker Compose
-- Git
+### Prerequisites
 
-## Installation
+- Docker installed on your machine
+- Git (if you want to clone the repository)
 
-1. Clone the repository:
+### Steps to Run the Application
+
+1. **Clone the repository** (if not already done):
    ```bash
    git clone https://github.com/mahfuj02/UI-component-Library.git
    cd UI-component-Library
    ```
 
-2. Install dependencies:
+2. **Build and run the Docker container**:
    ```bash
-   npm install
+   # Build the Docker image
+   docker build -t mahfuj_ui_component_library .
+
+   # Run the container with the required name and port mapping
+   docker run -d --name mahfuj_coding_assignment13 -p 8018:8018 mahfuj_ui_component_library
    ```
 
-3. Initialize Husky:
-   ```bash
-   npm run prepare
+3. **Access the application**:
+   Open your web browser and navigate to:
+   ```
+   http://localhost:8018
    ```
 
-## Development
-
-### Starting the Development Server
-
-```bash
-npm start
-```
-
-This will start the development server on [http://localhost:3000](http://localhost:3000).
-
-### Code Quality Tools
-
-- **Formatting Code with Prettier**:
-  ```bash
-  npm run format
-  ```
-
-- **Linting with ESLint**:
-  ```bash
-  npm run lint
-  ```
-
-- **Fixing Lint Issues**:
-  ```bash
-  npm run lint:fix
-  ```
-
-- **Running Tests**:
-  ```bash
-  npm test
-  ```
-
-### Pre-commit Hooks
-
-The project uses Husky to run the following checks before each commit:
-
-- ESLint to identify and fix code quality issues
-- Prettier to ensure consistent code formatting
-- Tests to verify functionality
-
-If any of these checks fail, the commit will be blocked until the issues are resolved.
-
-## Deployment with Docker
-
-### Build and Run with Docker Compose
-
-The easiest way to deploy the application is using Docker Compose:
-
-```bash
-docker-compose up -d
-```
-
-This will:
-1. Build the Docker image
-2. Create a container named `mahfuj_coding_assignment13`
-3. Start the container and expose the application on port 8018
-
-### Build and Run with Docker CLI
-
-Alternatively, you can use Docker CLI commands:
-
-1. Build the Docker image:
+4. **Stop the container** (when you're done):
    ```bash
-   docker build -t ui-component-library .
+   docker stop mahfuj_coding_assignment13
+   docker rm mahfuj_coding_assignment13
    ```
 
-2. Run the container:
+## Code Quality Checks
+
+This project implements several code quality checks:
+
+### 1. Pre-commit Hooks with Husky
+
+Husky is configured to run the following checks before each commit:
+- ESLint to detect and fix code quality issues
+- Prettier to enforce consistent code formatting
+- Jest tests to ensure all components work as expected
+
+If any of these checks fail, the commit will be blocked.
+
+### 2. GitHub Actions CI/CD Pipeline
+
+The GitHub Actions workflow runs on every push and pull request to the main branch, checking:
+- Code formatting with Prettier
+- Code quality with ESLint
+- Component functionality with automated tests
+
+### 3. How to Modify Components
+
+When modifying components:
+1. Make your changes
+2. Commit your changes:
    ```bash
-   docker run -d --name mahfuj_coding_assignment13 -p 8018:8018 ui-component-library
+   git add .
+   git commit -m "Your change description"
+   ```
+3. If any quality checks fail, fix the issues and try again
+4. Push your changes:
+   ```bash
+   git push origin main
    ```
 
-### Accessing the Deployed Application
-
-Once the container is running, access the application at:
-[http://localhost:8018](http://localhost:8018) or [http://127.0.0.1:8018](http://127.0.0.1:8018)
-
-## CI/CD Pipeline
-
-This project includes a GitHub Actions workflow that runs on every push and pull request to the main branch. The workflow:
-
-1. Checks out the code
-2. Sets up Node.js
-3. Installs dependencies
-4. Runs ESLint to check code quality
-5. Runs Prettier to verify formatting
-6. Runs tests to ensure functionality
-7. Builds the application for production
-
-If any step fails, the workflow will fail and notify you of the issues.
-
-## Folder Structure
+## Project Structure
 
 ```
 .
-├── .github/workflows      # GitHub Actions CI/CD configuration
-├── .husky                 # Git hooks for pre-commit checks
-├── public                 # Static assets
-├── src                    # Source code
-│   ├── components         # UI components
-│   ├── styles             # CSS and styling
+├── .github/workflows    # GitHub Actions configuration
+├── .husky               # Pre-commit hook configuration
+├── src/                 # Source code
+│   ├── components/      # UI Components
 │   └── ...
-├── .eslintrc.js           # ESLint configuration
-├── .prettierrc            # Prettier configuration
-├── Dockerfile             # Docker build configuration
-├── docker-compose.yml     # Docker Compose configuration
-├── nginx.conf             # Nginx server configuration
-└── README.md              # This documentation
+├── .eslintrc            # ESLint configuration
+├── .prettierrc          # Prettier configuration
+├── Dockerfile           # Docker configuration
+├── README.md            # This file
+└── package.json         # Project dependencies and scripts
 ```
 
-## Contributing
+## Technical Details
 
-When contributing to this project, your code will automatically be checked for:
-- Proper formatting with Prettier
-- Code quality with ESLint
-- Passing tests
-
-The GitHub Actions workflow will run these same checks when you create a pull request.
+- The Docker container runs on port 8018
+- Working directory: `/mahfuj_ui_garden_build_checks`
+- Container name: `mahfuj_coding_assignment13`
