@@ -1,22 +1,32 @@
-FROM node:18-alpine
+# Build stage
+FROM node:18-alpine as build
 
-WORKDIR /ahmed_mahfuj_ui_garden
+# Set working directory
+WORKDIR /mahfuj_ui_garden_build_checks
 
 # Copy package files
-COPY package*.json ./
+COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm ci
 
-# Copy rest of the code
+# Copy all files
 COPY . .
 
-# Build storybook
-RUN npm run build-storybook
+# Build app
+RUN npm run build
 
-# Use nginx to serve
+# Production stage
 FROM nginx:alpine
-COPY --from=0 /ahmed_mahfuj_ui_garden/storybook-static /usr/share/nginx/html
-EXPOSE 8083
 
+# Copy built files from build stage
+COPY --from=build /mahfuj_ui_garden_build_checks/build /usr/share/nginx/html
+
+# Copy custom nginx config to serve React Router routes properly
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose port 8018
+EXPOSE 8018
+
+# Start nginx
 CMD ["nginx", "-g", "daemon off;"]

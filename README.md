@@ -1,273 +1,157 @@
-# Mahfuj Ahmed - UI Garden
+# UI Component Library with Code Quality Checks
 
-## Overview
-This is a React-based component library built using Vite, Storybook, and Docker.
+This project extends the UI Component Library from Assignment 12 with code quality checks and Docker deployment.
 
-## Prerequisites
-- Node.js (v16 or higher)
-- Docker
+## Features
 
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd mahfuj_ahmed_ui_garden
-Install dependencies:
-
-bash
-Copy
-npm install
-Run Storybook:
-
-bash
-Copy
-npm run storybook
-Build and run the Docker container:
-
-bash
-Copy
-docker build -t mahfuj_ahmed_coding_assignment12 .
-docker run -d -p 8083:80 --name mahfuj_ahmed_coding_assignment12 mahfuj_ahmed_coding_assignment12
-Access the Application
-Storybook: Open http://localhost:6006 in your browser.
-
-Production Build: Open http://localhost:8083 in your browser.
-
-Copy
-Add Comments to Code:
-Ensure your code is well-documented with comments explaining the purpose of each component and function.
-
-Step 5: Push to GitHub
-Initialize Git Repository (if not already done):
-
-bash
-Copy
-git init
-git add .
-git commit -m "Initial commit"
-Create a GitHub Repository:
-
-Go to GitHub and create a new repository.
-
-Follow the instructions to push your local repository to GitHub:
-
-bash
-Copy
-git remote add origin <repository-url>
-git branch -M main
-git push -u origin main
-Step 6: Submit Your Assignment
-Submit via LEARN Dropbox:
-
-Upload the following files:
-
-Dockerfile
-
-README.md
-
-Provide the link to your GitHub repository.
-
-Verify Submission:
-
-Double-check that all files are included and the GitHub repository is accessible.
-
-Optional: Additional Enhancements
-Add More Tests:
-
-Write additional tests to cover edge cases and improve test coverage.
-
-Add Storybook Addons:
-
-Install and configure additional Storybook addons (e.g., @storybook/addon-a11y for accessibility testing).
-
-Deploy to a Hosting Service:
-
-Deploy your Storybook or production build to a hosting service like Vercel, Netlify, or GitHub Pages.
-
-By following these steps, you’ll complete your assignment and ensure your component library is fully functional, tested, and ready for submission. Good luck! 🚀
-
-write a detail readme file for me.
-Here’s a detailed README.md file tailored for your Web Component Library assignment. This file includes all the necessary information for setting up, running, and testing your project.
-
-markdown
-Copy
-# Mahfuj Ahmed - UI Garden
-
-## Overview
-This project is a **Web Component Library** built using **React**, **Vite**, **Storybook**, and **Docker**. It includes a collection of reusable UI components such as Button, Label, Table, Dropdown, and more. Each component is fully responsive, tested, and documented in Storybook.
-
-The project is containerized using Docker and can be run locally on `localhost:8083`.
-
----
-
-## Table of Contents
-1. [Prerequisites](#prerequisites)
-2. [Installation](#installation)
-3. [Running the Project](#running-the-project)
-   - [Running Storybook](#running-storybook)
-   - [Running Tests](#running-tests)
-   - [Building the Project](#building-the-project)
-4. [Docker Setup](#docker-setup)
-5. [Accessing the Application](#accessing-the-application)
-6. [Project Structure](#project-structure)
-7. [Component List](#component-list)
-8. [Testing](#testing)
-9. [Contributing](#contributing)
-10. [License](#license)
-
----
+- UI Component Library with reusable components
+- Husky pre-commit hooks for code quality enforcement
+- Prettier for consistent code formatting
+- ESLint for code quality rules
+- Automated testing with pre-commit validation
+- GitHub Actions CI/CD pipeline
+- Docker containerization
+- Nginx server for hosting the production build
 
 ## Prerequisites
-Before you begin, ensure you have the following installed:
-- **Node.js** (v16 or higher)
-- **npm** (comes with Node.js)
-- **Docker** (for containerization)
 
----
+- Node.js (v16+)
+- npm (v8+)
+- Docker and Docker Compose
+- Git
 
 ## Installation
+
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd mahfuj_ahmed_ui_garden
-Install dependencies:
+   git clone https://github.com/mahfuj02/UI-component-Library.git
+   cd UI-component-Library
+   ```
 
-bash
-Copy
-npm install
-Running the Project
-Running Storybook
-To view and interact with the components in Storybook:
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-bash
-Copy
-npm run storybook
-Open http://localhost:6006 in your browser.
+3. Initialize Husky:
+   ```bash
+   npm run prepare
+   ```
 
-Use the Controls panel in Storybook to modify component properties (e.g., text, background color, disabled state).
+## Development
 
-Running Tests
-To run unit tests for all components:
+### Starting the Development Server
 
-bash
-Copy
-npm test
-This will execute all test files (*.tests.tsx) and display the results in the terminal.
+```bash
+npm start
+```
 
-Building the Project
-To create a production build of the React app:
+This will start the development server on [http://localhost:3000](http://localhost:3000).
 
-bash
-Copy
-npm run build
-The production files will be generated in the dist folder.
+### Code Quality Tools
 
-Docker Setup
-The project is containerized using Docker. Follow these steps to build and run the Docker container:
+- **Formatting Code with Prettier**:
+  ```bash
+  npm run format
+  ```
 
-Build the Docker image:
+- **Linting with ESLint**:
+  ```bash
+  npm run lint
+  ```
 
-bash
-Copy
-docker build -t mahfuj_ahmed_coding_assignment12 .
-Run the Docker container:
+- **Fixing Lint Issues**:
+  ```bash
+  npm run lint:fix
+  ```
 
-bash
-Copy
-docker run -d -p 8083:80 --name mahfuj_ahmed_coding_assignment12 mahfuj_ahmed_coding_assignment12
-Accessing the Application
-Storybook: Open http://localhost:6006 in your browser.
+- **Running Tests**:
+  ```bash
+  npm test
+  ```
 
-Production Build: Open http://localhost:8083 in your browser.
+### Pre-commit Hooks
 
-Project Structure
-The project is organized as follows:
+The project uses Husky to run the following checks before each commit:
 
-Copy
-mahfuj_ahmed_ui_garden/
-├── src/
-│   ├── components/
-│   │   ├── Button/
-│   │   │   ├── Button.tsx
-│   │   │   ├── Button.stories.tsx
-│   │   │   ├── Button.types.ts
-│   │   │   ├── Button.tests.tsx
-│   │   │   └── index.ts
-│   │   ├── Label/
-│   │   │   ├── Label.tsx
-│   │   │   ├── Label.stories.tsx
-│   │   │   ├── Label.types.ts
-│   │   │   ├── Label.tests.tsx
-│   │   │   └── index.ts
-│   │   └── ... (other components)
-├── .storybook/            # Storybook configuration
-├── public/                # Static assets
-├── dist/                  # Production build
-├── Dockerfile             # Docker configuration
-├── README.md              # Project documentation
-└── package.json           # Project dependencies
-Component List
-The library includes the following components:
+- ESLint to identify and fix code quality issues
+- Prettier to ensure consistent code formatting
+- Tests to verify functionality
 
-Button
+If any of these checks fail, the commit will be blocked until the issues are resolved.
 
-Label
+## Deployment with Docker
 
-Text
+### Build and Run with Docker Compose
 
-Table
+The easiest way to deploy the application is using Docker Compose:
 
-Table Header
+```bash
+docker-compose up -d
+```
 
-Table Row
+This will:
+1. Build the Docker image
+2. Create a container named `mahfuj_coding_assignment13`
+3. Start the container and expose the application on port 8018
 
-Table Cell
+### Build and Run with Docker CLI
 
-Table Footer
+Alternatively, you can use Docker CLI commands:
 
-Dropdown
+1. Build the Docker image:
+   ```bash
+   docker build -t ui-component-library .
+   ```
 
-Radio Button
+2. Run the container:
+   ```bash
+   docker run -d --name mahfuj_coding_assignment13 -p 8018:8018 ui-component-library
+   ```
 
-Image
+### Accessing the Deployed Application
 
-Hero Image
+Once the container is running, access the application at:
+[http://localhost:8018](http://localhost:8018) or [http://127.0.0.1:8018](http://127.0.0.1:8018)
 
-Card
+## CI/CD Pipeline
 
-Each component has:
+This project includes a GitHub Actions workflow that runs on every push and pull request to the main branch. The workflow:
 
-A .tsx file for the component logic.
+1. Checks out the code
+2. Sets up Node.js
+3. Installs dependencies
+4. Runs ESLint to check code quality
+5. Runs Prettier to verify formatting
+6. Runs tests to ensure functionality
+7. Builds the application for production
 
-A .stories.tsx file for Storybook documentation.
+If any step fails, the workflow will fail and notify you of the issues.
 
-A .types.ts file for TypeScript interfaces.
+## Folder Structure
 
-A .tests.tsx file for unit tests.
+```
+.
+├── .github/workflows      # GitHub Actions CI/CD configuration
+├── .husky                 # Git hooks for pre-commit checks
+├── public                 # Static assets
+├── src                    # Source code
+│   ├── components         # UI components
+│   ├── styles             # CSS and styling
+│   └── ...
+├── .eslintrc.js           # ESLint configuration
+├── .prettierrc            # Prettier configuration
+├── Dockerfile             # Docker build configuration
+├── docker-compose.yml     # Docker Compose configuration
+├── nginx.conf             # Nginx server configuration
+└── README.md              # This documentation
+```
 
-An index.ts file for exports.
+## Contributing
 
-Testing
-Each component has at least two unit tests:
+When contributing to this project, your code will automatically be checked for:
+- Proper formatting with Prettier
+- Code quality with ESLint
+- Passing tests
 
-Visibility Test: Ensures the component is rendered correctly.
-
-Disabled State Test: Ensures the component changes appearance when disabled.
-
-To run all tests:
-
-bash
-Copy
-npm test
-Contributing
-Contributions are welcome! If you'd like to contribute:
-
-Fork the repository.
-
-Create a new branch (git checkout -b feature/YourFeatureName).
-
-Commit your changes (git commit -m 'Add some feature').
-
-Push to the branch (git push origin feature/YourFeatureName).
-
-Open a pull request.
+The GitHub Actions workflow will run these same checks when you create a pull request.
